@@ -7,7 +7,7 @@ Kahoot Offline - Equipo 6 FCFM
 
 import json
 import time
-from flask_socketio import emit, broadcast
+from flask_socketio import emit
 from backend.models.player import Player
 from backend.models.question import QuestionBank
 
