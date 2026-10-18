@@ -1,0 +1,255 @@
+/* ═══════════════════════════════════════════════════════════
+   KAHOOT OFFLINE - EQUIPO 6 FCFM
+   Estilos principales
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --accent: #e74c3c;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --light: #ecf0f1;
+    --dark: #1a1a2e;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+/* ═══ HOST PANEL ═══ */
+.host-header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.3);
+}
+
+.host-header h1 {
+    font-size: 2.5rem;
+    color: var(--warning);
+}
+
+.subtitle {
+    color: var(--light);
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+.connection-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+.host-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section-qr {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.qr-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    color: var(--dark);
+    text-align: center;
+}
+
+.ip-display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin-top: 10px;
+}
+
+.player-list-container {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 15px;
+    min-width: 250px;
+}
+
+.player-list-container ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.player-list-container li {
+    padding: 8px 15px;
+    margin: 5px 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+/* ═══ PREGUNTA ═══ */
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.question-text {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.option-display {
+    padding: 25px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ═══ BOTONES ═══ */
+.btn {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.btn-start { background: var(--success); color: white; }
+.btn-next { background: var(--secondary); color: white; }
+.btn-end { background: var(--accent); color: white; }
+.btn-join { background: var(--warning); color: var(--dark); width: 100%; }
+
+.host-controls {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* ═══ PLAYER (MOBILE) ═══ */
+.player-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lobby-container, .game-container, .results-container {
+    max-width: 500px;
+    width: 95%;
+    padding: 30px;
+    text-align: center;
+}
+
+.join-form input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.game-question {
+    font-size: 1.4rem;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+.game-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.option-btn {
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.option-btn:disabled {
+    cursor: not-allowed;
+}
+
+.feedback {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.feedback.correct { background: var(--success); }
+.feedback.incorrect { background: var(--accent); }
+
+/* ═══ PODIO ═══ */
+.podium-item {
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+}
+
+.position-1 { background: gold; color: var(--dark); font-size: 1.3rem; }
+.position-2 { background: silver; color: var(--dark); font-size: 1.1rem; }
+.position-3 { background: #cd7f32; color: var(--dark); font-size: 1rem; }
+
+.medal { font-size: 2rem; }
+
+.methodology-note {
+    margin-top: 30px;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* ═══ TIMER ═══ */
+#timer-display, #game-timer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--warning);
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Resultados | Kahoot Equipo 6</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="player-body">
+    <div class="results-container">
+        <h1>🏆 RESULTADOS FINALES</h1>
+        <p class="subtitle">Equipo 6 - FCFM UANL</p>
+        
+        <div id="final-podium"></div>
+        
+        <p class="thanks">¡Gracias por participar! 🎉</p>
+        <p class="methodology-note">
+            "La metodología de programación no es burocracia, 
+            es la base de todo software profesional."
+        </p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script>
+        const socket = io();
+        
+        socket.on('game_over', function(data) {
+            displayPodium(data.podium);
+        });
+
+        function displayPodium(podium) {
+            const container = document.getElementById('final-podium');
+            const medals = ['🥇', '🥈', '🥉'];
+            const positions = ['1er Lugar', '2do Lugar', '3er Lugar'];
+            
+            let html = '';
+            podium.forEach((player, i) => {
+                html += `
+                    <div class="podium-item position-${i+1}">
+                        <span class="medal">${medals[i]}</span>
+                        <span class="position">${positions[i]}</span>
+                        <span class="name">${player.username}</span>
+                        <span class="score">${player.score} pts</span>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

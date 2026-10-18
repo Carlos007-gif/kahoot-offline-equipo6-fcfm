@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Unirse al Juego | Equipo 6 FCFM</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="player-body">
+    
+    <div class="lobby-container">
+        <h1>🎮 KAHOOT OFFLINE</h1>
+        <p class="subtitle">Equipo 6 - FCFM UANL</p>
+        
+        <!-- FORMULARIO DE REGISTRO -->
+        <div class="join-form" id="join-form">
+            <input type="text" id="username-input" 
+                   placeholder="Escribe tu nombre" 
+                   maxlength="20" autocomplete="off">
+            <button id="btn-join" class="btn btn-join" onclick="joinGame()">
+                🎯 UNIRME AL JUEGO
+            </button>
+        </div>
+        
+        <!-- MENSAJE DE ERROR -->
+        <div class="error-message" id="error-message" style="display:none;"></div>
+        
+        <!-- SALA DE ESPERA -->
+        <div class="waiting-room" id="waiting-room" style="display:none;">
+            <h2>✅ ¡Estás dentro, <span id="player-name"></span>!</h2>
+            <p>Esperando a que el host inicie el juego...</p>
+            <div class="player-count">
+                👥 Jugadores conectados: <span id="lobby-count">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let myName = '';
+
+        function joinGame() {
+            const input = document.getElementById('username-input');
+            myName = input.value.trim();
+            
+            if (myName.length < 3) {
+                showError('El nombre debe tener al menos 3 caracteres');
+                return;
+            }
+            
+            socket.emit('join', { username: myName });
+        }
+
+        socket.on('player_joined', function(data) {
+            if (data.username === myName) {
+                document.getElementById('join-form').style.display = 'none';
+                document.getElementById('waiting-room').style.display = 'block';
+                document.getElementById('player-name').textContent = myName;
+            }
+        });
+
+        socket.on('player_count', function(count) {
+            document.getElementById('lobby-count').textContent = count;
+        });
+
+        socket.on('game_started', function(data) {
+            window.location.href = '/game';
+        });
+
+        socket.on('error', function(data) {
+            showError(data.message);
+        });
+
+        function showError(msg) {
+            const el = document.getElementById('error-message');
+            el.textContent = '❌ ' + msg;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 3000);
+        }
+
+        // Unirse con Enter
+        document.getElementById('username-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') joinGame();
+        });
+    </script>
+</body>
+</html>

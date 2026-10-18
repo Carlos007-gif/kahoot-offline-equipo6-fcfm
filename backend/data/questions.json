@@ -1,0 +1,93 @@
+[
+    {
+        "id": 1,
+        "text": "¿Cuál es la PRIMERA etapa de la metodología según Cairo?",
+        "options": [
+            "Codificación",
+            "Análisis del problema",
+            "Pruebas",
+            "Documentación"
+        ],
+        "answer": 1,
+        "category": "Metodología (Angel)",
+        "explanation": "Cairo establece: 1) Análisis, 2) Construcción del algoritmo, 3) Verificación."
+    },
+    {
+        "id": 2,
+        "text": "¿Qué estructura se usa cuando el número de iteraciones es CONOCIDO?",
+        "options": [
+            "MIENTRAS (WHILE)",
+            "REPETIR (FOR)",
+            "SI...ENTONCES",
+            "HACER-MIENTRAS"
+        ],
+        "answer": 1,
+        "category": "Estructuras (Andriy)",
+        "explanation": "REPETIR (FOR) se usa cuando sabemos cuántas veces repetir. MIENTRAS cuando no."
+    },
+    {
+        "id": 3,
+        "text": "¿Qué símbolo de diagrama de flujo representa una DECISIÓN?",
+        "options": [
+            "Rectángulo",
+            "Paralelogramo",
+            "Rombo",
+            "Óvalo"
+        ],
+        "answer": 2,
+        "category": "Representación (David)",
+        "explanation": "El rombo evalúa una condición y tiene salidas Sí/No."
+    },
+    {
+        "id": 4,
+        "text": "En Python, ¿cómo se traduce 'Leer NUM' del pseudocódigo Cairo?",
+        "options": [
+            "print(NUM)",
+            "NUM = input()",
+            "NUM <- input()",
+            "read(NUM)"
+        ],
+        "answer": 1,
+        "category": "Codificación (David)",
+        "explanation": "Leer → input(), Hacer → asignación (=), Escribir → print()"
+    },
+    {
+        "id": 5,
+        "text": "¿Cuál es el error MÁS PELIGROSO porque el programa corre pero da resultado incorrecto?",
+        "options": [
+            "Error de sintaxis",
+            "Error de ejecución",
+            "Error lógico",
+            "Error de compilación"
+        ],
+        "answer": 2,
+        "category": "Pruebas (Kendrick)",
+        "explanation": "El error lógico es silencioso: compila, corre, no truena, pero el resultado está MAL."
+    },
+    {
+        "id": 6,
+        "text": "¿Qué delimitador usa Cairo para comentarios en pseudocódigo?",
+        "options": [
+            "// comentario",
+            "<!-- comentario -->",
+            "{ comentario }",
+            "# comentario"
+        ],
+        "answer": 2,
+        "category": "Documentación (Kendrick)",
+        "explanation": "Cairo usa llaves { } para comentarios. Python usa #, C usa //, HTML usa <!-- -->"
+    },
+    {
+        "id": 7,
+        "text": "¿Qué tipo de mantenimiento se aplica cuando cambian los requerimientos?",
+        "options": [
+            "Correctivo",
+            "Adaptativo",
+            "Perfectivo",
+            "Preventivo"
+        ],
+        "answer": 1,
+        "category": "Mantenimiento (Carlos)",
+        "explanation": "Adaptativo = adaptarse a cambios externos. Correctivo = arreglar bugs."
+    }
+]

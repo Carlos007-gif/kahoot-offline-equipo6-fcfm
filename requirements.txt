@@ -1,0 +1,21 @@
+# ═══════════════════════════════════════════════════════════
+# DEPENDENCIAS DEL PROYECTO - Kahoot Offline Equipo 6 FCFM
+# ═══════════════════════════════════════════════════════════
+
+# Framework Web
+Flask==3.0.0
+
+# WebSockets (Tiempo Real)
+Flask-SocketIO==5.3.6
+python-socketio==5.10.0
+python-engineio==4.8.0
+
+# Servidor WebSocket (necesario para Flask-SocketIO)
+eventlet==0.35.1
+
+# Generación de código QR
+qrcode==7.4.2
+Pillow==10.2.0
+
+# Utilidades
+python-dotenv==1.0.0

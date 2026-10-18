@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Kahoot Offline - Panel Host | Equipo 6 FCFM</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="host-body">
+    
+    <!-- HEADER -->
+    <header class="host-header">
+        <h1>🎮 KAHOOT OFFLINE</h1>
+        <p class="subtitle">Equipo 6 - FCFM UANL - Metodologías de la Programación</p>
+        <div class="connection-info">
+            <span id="player-count">👥 Jugadores: 0</span>
+            <span id="game-status">⏸️ Esperando</span>
+        </div>
+    </header>
+
+    <!-- PANEL PRINCIPAL -->
+    <main class="host-main">
+        
+        <!-- SECCIÓN: QR Y CONEXIÓN -->
+        <section class="section-qr">
+            <div class="qr-container">
+                <div id="qr-code">
+                    <p>📱 Escanea para jugar</p>
+                    <p class="ip-display" id="ip-display">http://localhost:5000/play</p>
+                </div>
+            </div>
+            <div class="player-list-container">
+                <h3>👥 Jugadores Conectados</h3>
+                <ul id="player-list"></ul>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: PREGUNTA ACTUAL -->
+        <section class="section-question" id="question-section" style="display:none;">
+            <div class="question-header">
+                <span id="q-number">Pregunta 1/7</span>
+                <span id="q-category">Categoría</span>
+                <div id="timer-display">⏱️ 30s</div>
+            </div>
+            <div class="question-text" id="question-text"></div>
+            <div class="options-grid" id="options-grid"></div>
+        </section>
+
+        <!-- SECCIÓN: SCORES EN VIVO -->
+        <section class="section-scores" id="scores-section" style="display:none;">
+            <h3>📊 Puntuaciones en Vivo</h3>
+            <div id="live-scores"></div>
+        </section>
+
+        <!-- SECCIÓN: PODIO FINAL -->
+        <section class="section-podium" id="podium-section" style="display:none;">
+            <h2>🏆 PODIO FINAL</h2>
+            <div id="podium-display"></div>
+        </section>
+
+    </main>
+
+    <!-- CONTROLES DEL HOST -->
+    <footer class="host-controls">
+        <button id="btn-start" class="btn btn-start" onclick="startGame()">
+            🚀 INICIAR JUEGO
+        </button>
+        <button id="btn-next" class="btn btn-next" onclick="nextQuestion()" style="display:none;">
+            ➡️ SIGUIENTE PREGUNTA
+        </button>
+        <button id="btn-end" class="btn btn-end" onclick="endGame()" style="display:none;">
+            🏁 TERMINAR JUEGO
+        </button>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="/static/js/socket.js"></script>
+    <script src="/static/js/timer.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

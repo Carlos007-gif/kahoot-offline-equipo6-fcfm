@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Jugando | Kahoot Equipo 6</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="player-body">
+    
+    <div class="game-container">
+        <!-- HEADER DEL JUEGO -->
+        <div class="game-header">
+            <span id="game-q-number">Pregunta 1/7</span>
+            <div id="game-timer">⏱️ 30</div>
+            <span id="game-score">⭐ 0 pts</span>
+        </div>
+
+        <!-- PREGUNTA -->
+        <div class="game-question" id="game-question-text"></div>
+
+        <!-- OPCIONES -->
+        <div class="game-options" id="game-options"></div>
+
+        <!-- FEEDBACK -->
+        <div class="feedback" id="feedback" style="display:none;"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let myScore = 0;
+        let hasVoted = false;
+
+        socket.on('new_question', function(data) {
+            hasVoted = false;
+            displayQuestion(data);
+        });
+
+        socket.on('game_started', function(data) {
+            displayQuestion(data);
+        });
+
+        function displayQuestion(data) {
+            document.getElementById('game-q-number').textContent = 
+                `Pregunta ${data.q_number}/${data.total}`;
+            document.getElementById('game-question-text').textContent = 
+                data.question.text;
+            
+            const optionsDiv = document.getElementById('game-options');
+            optionsDiv.innerHTML = '';
+            
+            const colors = ['#e74c3c', '#3498db', '#f39c12', '#27ae60'];
+            const shapes = ['🔺', '🔷', '🟡', '🟩'];
+            
+            data.question.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.style.backgroundColor = colors[i];
+                btn.innerHTML = `${shapes[i]} ${opt}`;
+                btn.onclick = () => vote(i);
+                optionsDiv.appendChild(btn);
+            });
+
+            // Timer
+            startTimer(data.time_limit);
+        }
+
+        function vote(choice) {
+            if (hasVoted) return;
+            hasVoted = true;
+            
+            const username = sessionStorage.getItem('username') || 'Anónimo';
+            socket.emit('vote', { player: username, choice: choice });
+            
+            // Deshabilitar botones
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.6';
+            });
+        }
+
+        socket.on('vote_confirmed', function(data) {
+            const feedback = document.getElementById('feedback');
+            feedback.style.display = 'block';
+            
+            if (data.correct) {
+                myScore += data.points;
+                feedback.innerHTML = `✅ ¡Correcto! +${data.points} puntos`;
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.innerHTML = '❌ Incorrecto';
+                feedback.className = 'feedback incorrect';
+            }
+            
+            document.getElementById('game-score').textContent = `⭐ ${myScore} pts`;
+        });
+
+        socket.on('game_over', function(data) {
+            window.location.href = '/results';
+        });
+
+        function startTimer(seconds) {
+            let timeLeft = seconds;
+            const timerEl = document.getElementById('game-timer');
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = `⏱️ ${timeLeft}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    timerEl.textContent = '⏱️ ¡Tiempo!';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
